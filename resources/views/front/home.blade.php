@@ -26,34 +26,21 @@
     <div class="row">
         @forelse($shirts->chunk(4) as $chunk)
             @foreach($chunk as $shirt)
-        <div class="small-3 columns">
-            <div class="item-wrapper">
-                <div class="img-wrapper">
-                    <a class="button expanded add-to-cart">
-                        Add to Cart
-                    </a>
-                    <a href="#">
-                        <img src="http://i.imgur.com/Mcw06Yt.png"/>
-                    </a>
+                <div class="small-3 medium-3 large-3 columns">
+
+                    <product :shirt="{{$shirt}}"
+                             shirtlink="{{route('shirt',$shirt->id)}}"
+                             shirtimagepath='{{asset("images/$shirt->image")}}'
+                    >
+                    </product>
+
                 </div>
-                <a href="#">
-                    <h3>
-                        Kickin with Kraken Tee
-                    </h3>
-                </a>
-                <h5>
-                    $19.99
-                </h5>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin posuere sem enim, accumsan convallis risus semper.
-                </p>
-            </div>
-        </div>
             @endforeach
-@empty
-            <h4>No Shirts</h4>
-            @endforelse
+        @empty
+            <h3>No shirts</h3>
+        @endforelse
     </div>
+
     <!-- Footer -->
     <br>
-    @endsection
+@endsection

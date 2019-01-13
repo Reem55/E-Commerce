@@ -32,12 +32,12 @@ class ProductsController extends Controller
         //imageUpload
         $image=$request->image;
         if($image){
-            $imageName=$image->getClientOiginalName();
+            $imageName=$image->getClientOriginalExtension();
             $image->move('images',$imageName);
             $formInput['image']=$imageName;
         }
         Product::create($formInput);
-        return redirect()->route('admin.index');
+        return redirect()->route('product.index');
     }
 }
 

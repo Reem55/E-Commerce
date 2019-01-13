@@ -37,7 +37,8 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Category::create($request->all());
+        return back();
     }
 
     /**
@@ -46,9 +47,14 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($categoryId=null)
     {
-        //
+        if(!empty($categoryId)){
+            $products=Category::find($categoryId)->products;
+        }
+        $categories=Category::all();
+        return view('admin.category.index',compact(['categories','products']));
+
     }
 
     /**

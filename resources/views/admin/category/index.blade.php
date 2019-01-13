@@ -1,6 +1,6 @@
 @extends('admin.layout.admin')
 
-@section('body')
+@section('content')
 
     <div class="navbar">
         <a class="navbar-brand" href="#">categories=></a>
@@ -8,7 +8,8 @@
     @if(!empty($categories))
     @forelse($categories as $category)
     <li>
-        <a href="#">{{$category->name}}</a>
+        <a href="{{route('category.show',$category->id)}}">{{$category->name}}</a>
+
     </li>
     @empty
         <li>No data</li>
@@ -30,7 +31,6 @@
                             {{ Form::text('name', null, array('class' => 'form-control')) }}
 
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -38,4 +38,25 @@
                     </div>
                     {!! Form::close() !!}
     </div>
+
+                @if(isset($products))
+
+                    <h3>Products</h3>
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Products</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($products as $product)
+                            <tr><td>{{$product->name}}</td></tr>
+                        @empty
+                            <tr><td>no data</td></tr>
+                        @endforelse
+
+                        </tbody>
+                    </table>
+    @endif
 @endsection
