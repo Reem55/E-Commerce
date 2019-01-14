@@ -15,7 +15,7 @@
                 </div>
                 <a href="{{route('shirt')}}">
                     <h3>
-                        {{$shirts->name}}
+                        {{$shirt->name}}
                     </h3>
                 </a>
                 <h5>
@@ -33,14 +33,13 @@
                     <a class="button expanded add-to-cart">
                         Add to Cart
                     </a>
-                    <a href="#">
-                        <img src="http://i.imgur.com/Mcw06Yt.png"/>
+                    <a href="{{route('cart.edit',$shirt->id)}}" class="button expanded add-to-cart">                        <img src="http://i.imgur.com/Mcw06Yt.png"/>
                     </a>
                 </div>
                 <a href="#">
-                    <h3>
-                        Kickin with Kraken Tee
-                    </h3>
+                    {{--<h3>--}}
+                        {{--Kickin with Kraken Tee--}}
+                    {{--</h3>--}}
                 </a>
                 <h5>
                     $19.99

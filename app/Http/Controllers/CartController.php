@@ -1,14 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\category;
 use App\Product;
-use Gloudemans\Shoppingcart\Facades\Cart;
-
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +13,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories=Category::all();
-        return view('admin.category.index',compact(['categories', 'product']));
+        $cartItems = Cart::getContent();
+        return view('cart.index');
     }
 
     /**
@@ -28,7 +24,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -39,8 +35,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->all());
-        return back();
+        //
     }
 
     /**
@@ -49,14 +44,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($categoryId=null)
+    public function show($id)
     {
-        if(!empty($categoryId)){
-            $products=Category::find($categoryId)->products;
-        }
-        $categories=Category::all();
-        return view('admin.category.index',compact(['categories','products']));
-
+        //
     }
 
     /**
@@ -65,9 +55,12 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($Id)
     {
-        //
+        $product=Product::find($Id);
+        Cart::add($Id,$product->name,1,$product->price,['size'=>'meduim']);
+
+        return back();
     }
 
     /**
@@ -79,7 +72,8 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Cart::update($id,$request->qty);
+        return back();
     }
 
     /**
