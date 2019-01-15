@@ -20,6 +20,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/cart', 'CartController');
+//Route::get('/cart', 'ProductsController@cart');
+//Route::get('add-to-cart/{id}', 'ProductsController@addToCart');
+
+
 Route::get('/logout', 'Auth\loginController@logout');
 
 Route::group(['prefix' => 'admin','middleware'=>'auth'], function(){
